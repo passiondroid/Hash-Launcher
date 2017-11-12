@@ -7,12 +7,13 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:layout_margin="16dp"
-    tools:context="com.app.launcher.yogi.com.app.launcher.hash.ui.applist.AppsListActivity">
+    tools:context="com.app.launcher.hash.ui.applist.AppsListActivity">
 
     <GridView
         android:id="@+id/grid"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:padding="5dp"
         android:numColumns="4"
         tools:listitem="@layout/item"
         android:background="#ffffff"/>

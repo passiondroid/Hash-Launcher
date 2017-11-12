@@ -67,6 +67,12 @@ public class NewsRVAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
                     .diskCacheStrategy(DiskCacheStrategy.RESULT)
                     .crossFade()
                     .into(viewHolder.sourceIV);
+        }else if(newsArticles.getSource().equalsIgnoreCase(Constants.ALJAZEERA)){
+            Glide.with(viewHolder.itemView.getContext())
+                    .load(R.drawable.aljazeera_logo)
+                    .diskCacheStrategy(DiskCacheStrategy.RESULT)
+                    .crossFade()
+                    .into(viewHolder.sourceIV);
         }
 
         Timestamp now = new Timestamp(System.currentTimeMillis());

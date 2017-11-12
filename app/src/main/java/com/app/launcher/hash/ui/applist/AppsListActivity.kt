@@ -34,7 +34,7 @@ class AppsListActivity : AppCompatActivity() {
         applications = ArrayList<App>()
 
         var realm = Realm.getDefaultInstance()
-        var apps: RealmResults<App> = realm.where(App::class.java).findAllAsync()
+        var apps: RealmResults<App> = realm.where(App::class.java).findAllSortedAsync("name")
         apps.addChangeListener( object : RealmChangeListener<RealmResults<App>>{
             override fun onChange(t: RealmResults<App>?) {
                 for(app in t!!){

@@ -44,7 +44,7 @@
 
     <com.app.launcher.hash.ui.custom.SearchEditText
         android:id="@+id/searchET"
-        android:layout_width="300dp"
+        android:layout_width="290dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:drawablePadding="5dp"
@@ -61,8 +61,8 @@
 
     <ImageView
         android:id="@+id/searchIV"
-        android:layout_width="30dp"
-        android:layout_height="30dp"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
         android:layout_marginRight="16dp"
         android:layout_marginTop="28dp"
         app:layout_constraintEnd_toEndOf="parent"

@@ -234,6 +234,7 @@ class MainFragment : BaseFragment(), MainFragmentMvpView, OnListFragmentInteract
         searchET.visibility = View.INVISIBLE
         searchET.setText("")
         recyclerView.visibility = View.INVISIBLE
+        topView.visibility = View.GONE
     }
 
     private fun startAppActivity(pckgName: String){

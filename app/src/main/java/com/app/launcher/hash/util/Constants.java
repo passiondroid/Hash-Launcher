@@ -14,6 +14,7 @@ public interface Constants {
     String UNSPLASH_API_BASE_URL ="https://api.unsplash.com";
 
     String TECHCRUNCH = "techcrunch";
+    String ALJAZEERA = "al-jazeera-english";
     String WALLPAPER_FREEZE = "WALLPAPER_FREEZE";
     String ONBOARDING_DONE="ONBOARDING_DONE";
 }
