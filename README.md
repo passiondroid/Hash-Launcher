@@ -1,4 +1,4 @@
 # Hash-Launcher
 Smart Launcher that will keep you productive
 
-![Alt text](/img.png?raw=true "Optional Title")
+<img src="https://i.imgur.com/3QFWeqX.png" width="500" height="500">
