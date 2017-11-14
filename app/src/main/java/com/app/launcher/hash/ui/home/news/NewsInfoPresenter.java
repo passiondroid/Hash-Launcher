@@ -41,7 +41,7 @@ public class NewsInfoPresenter<V extends NewsInfoMvpView> extends BasePresenter<
                             @Override
                             public NewsArticles apply(NewsArticles newsArticles, NewsArticles newsArticles2) throws Exception {
                                 newsArticles.getArticles().addAll(newsArticles2.getArticles());
-                                Collections.shuffle(newsArticles.getArticles());
+//                                Collections.shuffle(newsArticles.getArticles());
                                 return newsArticles;
                             }
                         })

@@ -1,21 +1,18 @@
 package com.app.launcher.hash.ui.home.news
 
 
-import android.app.PendingIntent
 import android.content.ActivityNotFoundException
 import android.content.Context
 import android.content.Intent
-import android.graphics.BitmapFactory
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.support.customtabs.CustomTabsIntent
+import android.support.v4.widget.SwipeRefreshLayout
 import android.support.v7.widget.LinearLayoutManager
-import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ProgressBar
 import android.widget.Toast
 import com.app.launcher.hash.R
 import com.app.launcher.hash.data.model.Article
@@ -24,15 +21,16 @@ import com.app.launcher.hash.ui.adapter.NewsRVAdapter
 import com.app.launcher.hash.ui.base.BaseFragment
 import com.app.launcher.hash.ui.interfaces.OnListFragmentInteractionListener
 import dagger.android.support.AndroidSupportInjection
+import kotlinx.android.synthetic.main.fragment_news.*
 import javax.inject.Inject
+
 
 class NewsFragment : BaseFragment(), NewsInfoMvpView, OnListFragmentInteractionListener {
 
     @Inject
     lateinit var newsInfoPresenter : NewsInfoMvpPresenter<NewsInfoMvpView>
 
-    private lateinit var recyclerView : RecyclerView;
-    private lateinit var progressBar : ProgressBar;
+    private lateinit var adapter : NewsRVAdapter;
 
     //TODO: Add a repository pattern
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -53,10 +51,34 @@ class NewsFragment : BaseFragment(), NewsInfoMvpView, OnListFragmentInteractionL
 
     override fun setUp(view: View?) {
         newsInfoPresenter.onAttach(this)
-        recyclerView = view?.findViewById(R.id.recyclerview)!!
-        progressBar = view?.findViewById(R.id.progressBar)!!
-        newsInfoPresenter?.getNewsArticles("techcrunch");
-//        newsInfoPresenter?.getNewsArticles("der-tagesspiegel");
+        swipeContainer.setOnRefreshListener(object: SwipeRefreshLayout.OnRefreshListener {
+            override fun onRefresh() {
+                newsInfoPresenter?.getNewsArticles("techcrunch");
+            }
+        });
+
+        //Get new news articles
+        swipeContainer.post(Runnable {
+            swipeContainer.setRefreshing(true)
+            newsInfoPresenter?.getNewsArticles("techcrunch");
+        })
+
+
+        var newsArticles = NewsArticles()
+        newsArticles.articles = ArrayList<Article>()
+        newsArticles.source=""
+        adapter = NewsRVAdapter(newsArticles, this)
+        var linearLayoutManager = LinearLayoutManager(activity)
+        linearLayoutManager.orientation = LinearLayoutManager.VERTICAL
+        recyclerview.layoutManager = linearLayoutManager
+        recyclerview.adapter = adapter;
+
+        // Configure the refreshing colors
+        swipeContainer.setColorSchemeResources(R.color.colorPrimary,
+                android.R.color.holo_orange_light,
+                R.color.colorPrimary,
+                android.R.color.holo_orange_light);
+
     }
 
     companion object {
@@ -72,13 +94,9 @@ class NewsFragment : BaseFragment(), NewsInfoMvpView, OnListFragmentInteractionL
     }
 
     override fun showNewsArtciles(newsArticles: NewsArticles) {
-        var adapter : NewsRVAdapter = NewsRVAdapter(newsArticles, this)
-        var linearLayoutManager : LinearLayoutManager = LinearLayoutManager(activity)
-        linearLayoutManager.orientation = LinearLayoutManager.VERTICAL
-        recyclerView.layoutManager = linearLayoutManager
-        recyclerView.adapter = adapter;
+        adapter.setArtciles(newsArticles);
+        swipeContainer.setRefreshing(false);
         adapter.notifyDataSetChanged()
-        progressBar.visibility = View.GONE
     }
 
     override fun onListFragmentInteraction(view: View?, `object`: Any?, position: Int) {

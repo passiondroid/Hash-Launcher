@@ -1,3 +1,6 @@
 <resources>
     <string name="app_name">Hash</string>
+    <string name="ok">Ok</string>
+    <string name="cancel">Cancel</string>
+    <string name="permission_message">Please allow contacts permission so that we can show your contacts in the search</string>
 </resources>

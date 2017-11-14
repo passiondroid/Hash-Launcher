@@ -393,6 +393,7 @@ class MainFragment : BaseFragment(), MainFragmentMvpView, OnListFragmentInteract
                 window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
                 window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
                 window.setNavigationBarColor(activity.getResources().getColor(R.color.dark_gray));
+                window.setStatusBarColor(activity.getResources().getColor(R.color.dark_gray));
                 showKeyboard()
             }
         })

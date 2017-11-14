@@ -22,6 +22,7 @@ import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.time.ZonedDateTime;
 import java.util.Date;
+import java.util.List;
 import java.util.TimeZone;
 
 /**
@@ -107,6 +108,17 @@ public class NewsRVAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
     @Override
     public int getItemCount() {
         return newsArticles.getArticles().size();
+    }
+
+    public void clear() {
+        newsArticles.getArticles().clear();
+        notifyDataSetChanged();
+    }
+
+    // Add a list of items -- change to type used
+    public void setArtciles(NewsArticles newsArticles) {
+        this.newsArticles = newsArticles;
+        notifyDataSetChanged();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder{
