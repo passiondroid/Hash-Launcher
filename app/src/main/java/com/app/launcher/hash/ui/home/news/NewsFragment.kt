@@ -4,10 +4,12 @@ package com.app.launcher.hash.ui.home.news
 import android.content.ActivityNotFoundException
 import android.content.Context
 import android.content.Intent
+import android.content.SharedPreferences
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.support.customtabs.CustomTabsIntent
+import android.support.v4.app.FragmentTransaction
 import android.support.v4.widget.SwipeRefreshLayout
 import android.support.v7.widget.LinearLayoutManager
 import android.view.LayoutInflater
@@ -19,7 +21,9 @@ import com.app.launcher.hash.data.model.Article
 import com.app.launcher.hash.data.model.NewsArticles
 import com.app.launcher.hash.ui.adapter.NewsRVAdapter
 import com.app.launcher.hash.ui.base.BaseFragment
+import com.app.launcher.hash.ui.home.newssources.NewsSourcesFragment
 import com.app.launcher.hash.ui.interfaces.OnListFragmentInteractionListener
+import com.app.launcher.hash.util.Constants
 import dagger.android.support.AndroidSupportInjection
 import kotlinx.android.synthetic.main.fragment_news.*
 import javax.inject.Inject
@@ -29,6 +33,9 @@ class NewsFragment : BaseFragment(), NewsInfoMvpView, OnListFragmentInteractionL
 
     @Inject
     lateinit var newsInfoPresenter : NewsInfoMvpPresenter<NewsInfoMvpView>
+
+    @Inject
+    lateinit var sharedPreferences : SharedPreferences
 
     private lateinit var adapter : NewsRVAdapter;
 
@@ -57,12 +64,17 @@ class NewsFragment : BaseFragment(), NewsInfoMvpView, OnListFragmentInteractionL
             }
         });
 
-        //Get new news articles
-        swipeContainer.post(Runnable {
-            swipeContainer.setRefreshing(true)
-            newsInfoPresenter?.getNewsArticles("techcrunch");
-        })
-
+        if(!sharedPreferences.getBoolean(Constants.IS_NEWS_SOURCES_SELECTED,false)){
+            val ft = activity.getSupportFragmentManager().beginTransaction()
+            ft.replace(R.id.container, NewsSourcesFragment.newInstance())
+            ft.commit()
+        }else {
+            //Get new news articles
+            swipeContainer.post(Runnable {
+                swipeContainer.setRefreshing(true)
+                newsInfoPresenter?.getNewsArticles("techcrunch");
+            })
+        }
 
         var newsArticles = NewsArticles()
         newsArticles.articles = ArrayList<Article>()

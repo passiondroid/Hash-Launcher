@@ -7,4 +7,6 @@
     <color name="tranparent_grey">#40222222</color>
     <color name="icon_color">#532297</color>
     <color name="dark_gray">#80000000</color>
+    <color name="btn_color_normal">#FFFFFF</color>
+    <color name="btn_color_pressed">#C0C0C0</color>
 </resources>

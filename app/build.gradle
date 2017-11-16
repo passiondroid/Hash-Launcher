@@ -50,6 +50,7 @@ dependencies {
     implementation "com.github.nisrulz:sensey:$rootProject.senseyVersion"
     implementation "com.journeyapps:zxing-android-embedded:$rootProject.zxingAndroidVersion"
     implementation "com.jakewharton.rxbinding2:rxbinding-appcompat-v7:$rootProject.rxBindings"
+    implementation 'com.hanks.animatecheckbox:library:0.1'
     debugCompile "com.facebook.stetho:stetho:$rootProject.stethoVersion"
     debugCompile "com.uphyca:stetho_realm:$rootProject.stethoRealmVersion"
     annotationProcessor "com.google.dagger:dagger-compiler:$rootProject.dagger2Version"

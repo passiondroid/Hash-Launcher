@@ -81,6 +81,8 @@ public class MainFragmentPresenter<V extends MainFragmentMvpView> extends BasePr
                     public void accept(TextViewAfterTextChangeEvent textViewAfterTextChangeEvent) throws Exception {
                         Realm realm = Realm.getDefaultInstance();
                         RealmResults<App> results = realm.where(App.class)
+                                //TODO: Add a new column that contains app name with no space and a new column for app usage
+                                //Apply search query on the basis of that
                                 .contains("name", textViewAfterTextChangeEvent.editable().toString(), Case.INSENSITIVE)
                                 .findAllAsync();
                         results.addChangeListener(new RealmChangeListener<RealmResults<App>>() {

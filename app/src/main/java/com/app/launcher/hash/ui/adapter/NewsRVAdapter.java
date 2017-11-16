@@ -70,7 +70,7 @@ public class NewsRVAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
                     .into(viewHolder.sourceIV);
         }else if(newsArticles.getSource().equalsIgnoreCase(Constants.ALJAZEERA)){
             Glide.with(viewHolder.itemView.getContext())
-                    .load(R.drawable.aljazeera_logo)
+                    .load(R.drawable.al_jazeera)
                     .diskCacheStrategy(DiskCacheStrategy.RESULT)
                     .crossFade()
                     .into(viewHolder.sourceIV);
